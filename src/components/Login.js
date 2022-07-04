@@ -14,7 +14,7 @@ export default function Login() {
 
     async function login(){
         try{
-            const response = await axios.post('http://localhost:5000/sign-in', data);
+            const response = await axios.post('https://projeto13-mywalletapp.herokuapp.com/sign-in', data);
             setUser(response.data);
             navigate('/transactions');
         } catch(e){

@@ -14,7 +14,7 @@ export default function Inputs(){
 
     async function save(){
         try{
-            await axios.post('http://localhost:5000/transactions/input', data, {
+            await axios.post('https://projeto13-mywalletapp.herokuapp.com/transactions/input', data, {
                 headers: {Authorization: `Bearer ${user.token}`}
             });
             alert('Entrada adicionada');

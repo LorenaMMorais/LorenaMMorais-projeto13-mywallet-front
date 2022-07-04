@@ -1,19 +1,21 @@
 import { useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { FaSignOutAlt } from 'react-icons/fa';
+import { BallTriangle } from 'react-loader-spinner';
 import UserContext from './../context/UserContext';
 import styled from 'styled-components';
 import axios from 'axios';
 
 export default function Transactions() {
     const [transactions, setTransactions] = useState();
+
     const navigate = useNavigate();
     const {user} = useContext(UserContext);
 
     useEffect(() => {
         (async() => {
             try{
-                const transactions = await axios.get('http://localhost:5000/transactions', {
+                const transactions = await axios.get('https://projeto13-mywalletapp.herokuapp.com/transactions', {
                     headers: {Authorization: `Bearer ${user.token}`}
                 });
                 setTransactions(transactions.data);
@@ -70,7 +72,7 @@ export default function Transactions() {
                 </Transaction>
             </Footer>
         </Container>
-    ): <p>Carregando</p>;
+    ): <Loading><BallTriangle color='#FFFFFF'/></Loading>;
 }
 
 const Container = styled.div`
@@ -218,3 +220,11 @@ const Balance = styled.h1`
     position: absolute;
     justify-content: space-between;
 `; 
+
+const Loading = styled.div`
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
