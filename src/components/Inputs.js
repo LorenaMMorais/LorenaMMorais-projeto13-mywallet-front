@@ -7,28 +7,28 @@ import axios from "axios";
 export default function Inputs(){
     const navigate = useNavigate();
     const {user} = useContext(UserContext);
-    const [datas, setDatas] = useState({
+    const [data, setData] = useState({
         value: '',
         description: ''
     });
 
     async function save(){
         try{
-            await axios.post('http://localhost:5000/transactions/inputs', datas, {
+            await axios.post('http://localhost:5000/transactions/inputs', data, {
                 headers: {Authorization: `Bearer ${user.token}`}
             });
             alert('Entrada adicionada');
             navigate('/transactions');
         } catch(e){
-            alert(e.response.datas);
+            alert(e.response.data);
         }
     }
 
     return(
         <Container>
             <H1>Nova entrada</H1>
-            <Input placeholder = 'Valor' value={data.value} onChange={e => setDatas({...datas, value: e.target.value})}/>
-            <Input placeholder = 'Descrição' value={data.description} onChange={e => setDatas({...datas, description: e.target.value})}/>
+            <Input placeholder = 'Valor' value={data.value} onChange={e => setData({...data, value: e.target.value})}/>
+            <Input placeholder = 'Descrição' value={data.description} onChange={e => setData({...data, description: e.target.value})}/>
             <Button onClick={save}>Salvar Entrada</Button>
         </Container>
     );

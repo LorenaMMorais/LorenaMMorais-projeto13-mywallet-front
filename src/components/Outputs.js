@@ -7,14 +7,14 @@ import axios from 'axios';
 export default function Outputs() {
     const navigate = useNavigate();
     const {user} = useContext(UserContext);
-    const [datas, setDatas] = useState({
+    const [data, setData] = useState({
         value: '',
         description: ''
     });
 
     async function save() {
         try {
-            await axios.post('http://localhost:5000/transactions/outputs', datas, {
+            await axios.post('http://localhost:5000/transactions/outputs', data, {
                 headers: {Authorization: `Bearer ${user.token}`}
             });
             alert('Saída adicionada');
@@ -28,8 +28,8 @@ export default function Outputs() {
         <Container>
             <H1>Nova saída</H1>
 
-            <Input placeholder='Valor' value={data.value} onChange={e => setDatas({...datas, value: e.target.value})}/>
-            <Input placeholder='Descrição' value={data.description} onChange={e => setDatas({...datas, description: e.target.value})}/>
+            <Input placeholder='Valor' value={data.value} onChange={e => setData({...data, value: e.target.value})}/>
+            <Input placeholder='Descrição' value={data.description} onChange={e => setData({...data, description: e.target.value})}/>
 
             <Button onClick={save}>Salvar saída</Button>
         </Container>

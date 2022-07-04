@@ -3,7 +3,6 @@ import { useContext } from 'react';
 import { FaSignOutAlt } from 'react-icons/fa';
 import UserContext from './../context/UserContext';
 import styled from 'styled-components';
-import axios from 'axios';
 
 export default function Transactions() {
     const navigate = useNavigate();
