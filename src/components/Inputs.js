@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import UserContext from './../context/UserContext';
 import styled from "styled-components";
 import axios from "axios";
 
 export default function Inputs(){
     const navigate = useNavigate();
+    const {user} = useContext(UserContext);
     const [datas, setDatas] = useState({
         value: '',
         description: ''
@@ -12,7 +14,9 @@ export default function Inputs(){
 
     async function save(){
         try{
-            await axios.post('http://localhost:5000/transactions/inputs', datas);
+            await axios.post('http://localhost:5000/transactions/inputs', datas, {
+                headers: {Authorization: `Bearer ${user.token}`}
+            });
             alert('Entrada adicionada');
             navigate('/transactions');
         } catch(e){

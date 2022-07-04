@@ -1,19 +1,21 @@
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import UserContext from './../context/UserContext';
 import styled from 'styled-components';
 import axios from 'axios';
 
 export default function Login() {
     const navigate = useNavigate();
-    const [datas, setDatas] = useState({
+    const {setUser} = useContext(UserContext);
+    const [data, setData] = useState({
         email: '',
         password: ''
     });
 
     async function login(){
         try{
-            await axios.post('http://localhost:5000/sign-in', datas);
-            alert('Sucesso no login');
+            const response = await axios.post('http://localhost:5000/sign-in', data);
+            setUser(response.data);
             navigate('/transactions');
         } catch(e){
             alert(e.response.data);
@@ -23,8 +25,8 @@ export default function Login() {
     return (
         <Container>
             <Logo>MyWallet</Logo>
-            <Input placeholder = 'E-mail' value={datas.email} onChange={e => setDatas({...datas, email: e.target.value})} />
-            <Input placeholder = 'Senha' type='password' value={datas.password} onChange={e => setDatas({...datas, password: e.target.value})} />
+            <Input placeholder = 'E-mail' value={data.email} onChange={e => setData({...data, email: e.target.value})} />
+            <Input placeholder = 'Senha' type='password' value={data.password} onChange={e => setData({...data, password: e.target.value})} />
             <Button onClick={login} >Entrar</Button>
             <Register onClick={() => navigate('/sign-up')}>Primeira vez? Cadastre-se!</Register>
         </Container>
