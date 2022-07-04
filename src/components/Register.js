@@ -16,7 +16,7 @@ export default function Register(){
         try{
             await axios.post('http://localhost:5000/sign-up', datas);
             alert('Cadastro realizado com sucesso!');
-            navigate('/');
+            navigate('/sign-in');
         } catch(e){
             alert ('Erro ao cadastrar');
             alert (e.response.data);
@@ -42,7 +42,6 @@ const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #945CBE;
 `;
 
 const Logo = styled.h1`

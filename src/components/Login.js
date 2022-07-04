@@ -39,7 +39,6 @@ const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #945CBE;
 `;
 
 const Logo = styled.h1`
