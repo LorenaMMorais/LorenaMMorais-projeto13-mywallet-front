@@ -14,6 +14,7 @@ export default function Login() {
         try{
             await axios.post('http://localhost:5000/sign-in', datas);
             alert('Sucesso no login');
+            navigate('/transactions');
         } catch(e){
             alert(e.response.data);
         }
