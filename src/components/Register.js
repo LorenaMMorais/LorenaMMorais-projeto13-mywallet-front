@@ -16,7 +16,7 @@ export default function Register(){
         try{
             await axios.post('http://localhost:5000/sign-up', datas);
             alert('Cadastro realizado com sucesso!');
-            navigate('/sign-in');
+            navigate('/');
         } catch(e){
             alert ('Erro ao cadastrar');
             alert (e.response.data);
@@ -31,7 +31,7 @@ export default function Register(){
             <Input placeholder='Senha' type='password' value={datas.password} onChange={e => setDatas({...datas, password: e.target.value})} />
             <Input placeholder='Confirme a senha' type='password' value={datas.passwordConfirm}  onChange={e => setDatas({...datas, passwordConfirm: e.target.value})} />
             <Button onClick={register}>Cadastrar</Button>
-            <Login onClick={() => navigate('/sign-in')}>Já tem uma conta? Entre agora</Login>
+            <Login onClick={() => navigate('/')}>Já tem uma conta? Entre agora</Login>
         </Container>
     );
 }
