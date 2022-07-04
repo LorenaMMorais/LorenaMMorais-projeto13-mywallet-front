@@ -1,14 +1,33 @@
 import styled from 'styled-components';
+import { useState } from 'react';
+import axios from 'axios';
 
 export default function Register(){
+    const [datas, setDatas] = useState({
+        name: '',
+        email: '',
+        password: '',
+        passwordConfirm: ''
+    });
+
+    async function register(){
+        try{
+            await axios.post('http://localhost:5000/sign-up', datas);
+            alert('Cadastro realizado com sucesso!');
+        } catch(e){
+            alert ('Erro ao cadastrar');
+            alert (e.response.data);
+        }
+    }
+
     return(
         <Container>
             <Logo>MyWallet</Logo>
-            <Input placeholder='Nome' />
-            <Input placeholder='E-mail' />
-            <Input placeholder='Senha' />
-            <Input placeholder='Confirme a senha' />
-            <Button>Cadastrar</Button>
+            <Input placeholder='Nome' value={datas.name} onChange={e => setDatas({...datas, name: e.target.value})} />
+            <Input placeholder='E-mail' value={datas.email} onChange={e => setDatas({...datas, email: e.target.value})} />
+            <Input placeholder='Senha' type='password' value={datas.password} onChange={e => setDatas({...datas, password: e.target.value})} />
+            <Input placeholder='Confirme a senha' type='password' value={datas.passwordConfirm}  onChange={e => setDatas({...datas, passwordConfirm: e.target.value})} />
+            <Button onClick={register}>Cadastrar</Button>
             <Login>Já tem uma conta? Entre agora</Login>
         </Container>
     );
